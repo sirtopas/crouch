@@ -41,8 +41,8 @@ namespace CrouchButchers.Model
         public bool SumByWeight { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderItems> OrderItems { get; set; }
+        public ICollection<OrderItems> OrderItems { get; set; }
 
-        public virtual ProductCategory ProductCategory { get; set; }
+        public ProductCategory ProductCategory { get; set; }
     }
 }
