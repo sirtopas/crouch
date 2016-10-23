@@ -25,8 +25,7 @@ export class CustomerComponent {
         this.http.get(this.url)
             .map(response => response.json())
             .subscribe((res) => {
-                this.customers = res,
-                    console.log(this.customers)
+                this.customers = res
             },
             (err) => console.log(err),
             () => console.log("Done")

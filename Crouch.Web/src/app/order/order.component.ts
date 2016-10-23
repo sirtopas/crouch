@@ -28,8 +28,7 @@ export class OrderComponent {
     this.http.get(this.url)
       .map(response => response.json())
       .subscribe((res) => {
-        this.orders = res,
-          console.log(this.orders)
+        this.orders = res
       },
       (err) => console.log(err),
       () => console.log("Done")
