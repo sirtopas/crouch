@@ -4,9 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { routing } from './app.routes';
+
 import { CustomerComponent } from './customer/customer.component';
 import { OrderComponent } from './order/order.component';
 
+import { CustomerService } from './services/customer.service';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -21,7 +23,9 @@ import { AppComponent } from './app.component';
     HttpModule,
     routing
   ],
-  providers: [],
+  providers: [
+    CustomerService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

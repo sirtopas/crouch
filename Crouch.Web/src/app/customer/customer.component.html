@@ -121,7 +121,7 @@
 				<div class="col-md-8">
 					<select *ngIf="customers" class="form-control" #customer (change)="getCustomer(customer.value)">
                         <option *ngFor="let order of customer.order" [value]="customer.order.orderId" placeholder="Select an order...">
-                            {{order.OrderId}}
+                            {{order.orderId}}
                         </option>
                     </select>
 				</div>

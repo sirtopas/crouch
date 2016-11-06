@@ -1,35 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
 import { Customer } from '../model/customer';
+import { CustomerService } from '../services/customer.service';
 import 'rxjs/Rx';
 
 @Component({
-    selector: 'crouch-customer',
-    templateUrl: 'customer.component.html',
-    styles: []
+    selector: 'app-crouch-customer',
+    templateUrl: 'customer.component.html'
 })
-export class CustomerComponent {
+export class CustomerComponent implements OnInit {
 
-    url: string;
     public customers: Customer[];
     public customer: Customer;
 
-    constructor(private http: Http) {
+    constructor(private http: Http, private customerService: CustomerService) {
         this.http = http;
-        this.getCustomers();
     }
 
-    public getCustomers() {
-        this.url = 'http://localhost:20476/Api/Customer';
-        this.http.get(this.url)
-            .map(response => response.json())
-            .subscribe((res) => {
-                this.customers = res
-            },
-            (err) => console.log(err),
-            () => console.log("Done")
-            );
+    ngOnInit() {
+        this.customerService.getCustomers().subscribe(res => this.customers = res);
     }
 
     public getCustomer(id: number) {
@@ -47,14 +36,14 @@ export class CustomerComponent {
     }
 
     public updateCustomer() {
-        if (this.customer.CustomerId === undefined) {
+        if (this.customer.customerId === undefined) {
             this.postCustomer();
         }
         else {
             var headers = new Headers();
             headers.append('Content-Type', 'application/json');
 
-            this.http.put('http://localhost:20476/Api/Customer/PutCustomer?id=' + this.customer.CustomerId, JSON.stringify(this.customer), { headers: headers })
+            this.http.put('http://localhost:20476/Api/Customer/PutCustomer?id=' + this.customer.customerId, JSON.stringify(this.customer), { headers: headers })
                 .map(response => response.json())
                 .subscribe((res) => {
                     this.customer = res
