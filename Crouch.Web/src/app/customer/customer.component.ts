@@ -21,14 +21,8 @@ export class CustomerComponent implements OnInit {
         this.customerService.getCustomers().subscribe(res => this.customers = res);
     }
 
-    public getCustomer(id: number) {
-        this.http.get('http://localhost:20476/Api/Customer/GetCustomer?id=' + id)
-            .map(response => response.json())
-            .subscribe((res) => {
-                this.customer = res
-            },
-            (err) => console.log(err)
-            );
+    public getCustomer(customerId: number) {
+        this.customerService.getCustomer(customerId).subscribe(res => this.customer = res);
     }
 
     public newCustomer() {

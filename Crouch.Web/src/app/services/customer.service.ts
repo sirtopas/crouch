@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Customer } from '../model/customer';
 import { Environment } from '../Environment';
@@ -15,6 +15,12 @@ export class CustomerService {
     public getCustomers(): Observable<Customer[]> {
         return this.http
             .get(Environment.baseUrl + 'Customer')
+            .map(res => res.json());
+    }
+
+    public getCustomer(customerId: number): Observable<Customer> {
+        return this.http
+            .get(Environment.baseUrl + 'Customer/' + customerId)
             .map(res => res.json());
     }
 }
