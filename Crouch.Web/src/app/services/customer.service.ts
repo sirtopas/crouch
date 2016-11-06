@@ -23,4 +23,8 @@ export class CustomerService {
             .get(Environment.baseUrl + 'Customer/' + customerId)
             .map(res => res.json());
     }
+
+    public putCustomer(customer: Customer) {
+        return this.http.put(Environment.baseUrl + 'Customer/' + customer.customerId, JSON.stringify(customer));
+    }
 }

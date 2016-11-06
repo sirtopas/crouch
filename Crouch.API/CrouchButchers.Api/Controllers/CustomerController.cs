@@ -33,14 +33,14 @@
 
         // PUT: api/Customer/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutCustomer(int id, Customer customer)
+        public IHttpActionResult PutCustomer(int customerId, Customer customer)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != customer.CustomerId)
+            if (customerId != customer.CustomerId)
             {
                 return BadRequest();
             }
@@ -53,7 +53,7 @@
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CustomerExists(id))
+                if (!CustomerExists(customerId))
                 {
                     return NotFound();
                 }

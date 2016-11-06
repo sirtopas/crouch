@@ -32,19 +32,13 @@ export class CustomerComponent implements OnInit {
     public updateCustomer() {
         if (this.customer.customerId === undefined) {
             this.postCustomer();
+        } else {
+            this.putCustomer();
         }
-        else {
-            var headers = new Headers();
-            headers.append('Content-Type', 'application/json');
+    }
 
-            this.http.put('http://localhost:20476/Api/Customer/PutCustomer?id=' + this.customer.customerId, JSON.stringify(this.customer), { headers: headers })
-                .map(response => response.json())
-                .subscribe((res) => {
-                    this.customer = res
-                },
-                (err) => console.log(err)
-                );
-        }
+    public putCustomer() {
+        this.customerService.putCustomer(this.customer).subscribe(complete => console.log("done"));
     }
 
     public postCustomer() {
