@@ -8,8 +8,8 @@
                 <option>
                     Please select...
                 </option>
-                <option *ngFor="let customer of customers" [value]="customer.CustomerId">
-                    {{customer.FirstName}} {{customer.LastName}} 
+                <option *ngFor="let customer of customers" [value]="customer.customerId">
+                    {{customer.firstName}} {{customer.lastName}} 
                 </option>
             </select>
 		</div>
@@ -28,7 +28,7 @@
 				<div class="col-md-12">
 					<label class="col-md-4 control-label">Title</label>
 					<div class="col-md-4">
-						<input type="text" placeholder="Title..." class="form-control input-md" [(ngModel)]="customer.Title" name="title">
+						<input type="text" placeholder="Title..." class="form-control input-md" [(ngModel)]="customer.title" name="title">
 					</div>
 					<div class="col-md-4"></div>
 				</div>
@@ -36,7 +36,7 @@
 				<div class="col-md-12">
 					<label class="col-md-4 control-label">First Name</label>
 					<div class="col-md-4">
-						<input type="text" placeholder="First Name..." class="form-control input-md" [(ngModel)]="customer.FirstName" name="firstName">
+						<input type="text" placeholder="First Name..." class="form-control input-md" [(ngModel)]="customer.firstName" name="firstName">
 					</div>
 					<div class="col-md-4"></div>
 				</div>
@@ -44,7 +44,7 @@
 				<div class="col-md-12">
 					<label class="col-md-4 control-label">Last Name</label>
 					<div class="col-md-4">
-						<input type="text" placeholder="Last Name..." class="form-control input-md" [(ngModel)]="customer.LastName" name="lastName">
+						<input type="text" placeholder="Last Name..." class="form-control input-md" [(ngModel)]="customer.lastName" name="lastName">
 					</div>
 					<div class="col-md-4"></div>
 				</div>
@@ -52,7 +52,7 @@
 				<div class="col-md-12">
 					<label class="col-md-4 control-label">Address 1</label>
 					<div class="col-md-4">
-						<input type="text" placeholder="Address 1..." class="form-control input-md" [(ngModel)]="customer.Address1" name="address1">
+						<input type="text" placeholder="Address 1..." class="form-control input-md" [(ngModel)]="customer.address1" name="address1">
 					</div>
 					<div class="col-md-4"></div>
 				</div>
@@ -60,7 +60,7 @@
 				<div class="col-md-12">
 					<label class="col-md-4 control-label">Address 2</label>
 					<div class="col-md-4">
-						<input type="text" placeholder="Address 2..." class="form-control input-md" [(ngModel)]="customer.Address2" name="address2">
+						<input type="text" placeholder="Address 2..." class="form-control input-md" [(ngModel)]="customer.address2" name="address2">
 					</div>
 					<div class="col-md-4"></div>
 				</div>
@@ -68,7 +68,7 @@
 				<div class="col-md-12">
 					<label class="col-md-4 control-label">Town</label>
 					<div class="col-md-4">
-						<input type="text" placeholder="Town..." class="form-control input-md" [(ngModel)]="customer.Town" name="town">
+						<input type="text" placeholder="Town..." class="form-control input-md" [(ngModel)]="customer.town" name="town">
 					</div>
 					<div class="col-md-4"></div>
 				</div>
@@ -76,7 +76,7 @@
 				<div class="col-md-12">
 					<label class="col-md-4 control-label">County</label>
 					<div class="col-md-4">
-						<input type="text" placeholder="County..." class="form-control input-md" [(ngModel)]="customer.County" name="county">
+						<input type="text" placeholder="County..." class="form-control input-md" [(ngModel)]="customer.county" name="county">
 					</div>
 					<div class="col-md-4"></div>
 				</div>
@@ -84,7 +84,7 @@
 				<div class="col-md-12">
 					<label class="col-md-4 control-label">Post Code</label>
 					<div class="col-md-4">
-						<input type="text" placeholder="PostCode..." class="form-control input-md" [(ngModel)]="customer.PostCode" name="postcode">
+						<input type="text" placeholder="PostCode..." class="form-control input-md" [(ngModel)]="customer.postCode" name="postcode">
 					</div>
 					<div class="col-md-4"></div>
 				</div>
@@ -92,7 +92,7 @@
 				<div class="col-md-12">
 					<label class="col-md-4 control-label">Phone Number</label>
 					<div class="col-md-4">
-						<input type="text" placeholder="Phone Number..." class="form-control input-md" [(ngModel)]="customer.PhoneNumber" name="phoneNumber">
+						<input type="text" placeholder="Phone Number..." class="form-control input-md" [(ngModel)]="customer.phoneNumber" name="phoneNumber">
 					</div>
 					<div class="col-md-4"></div>
 				</div>
@@ -100,7 +100,7 @@
 				<div class="col-md-12">
 					<label class="col-md-4 control-label">Mobile Number</label>
 					<div class="col-md-4">
-						<input type="text" placeholder="Mobile Number..." class="form-control input-md" [(ngModel)]="customer.MobileNumber" name="mobileNumber">
+						<input type="text" placeholder="Mobile Number..." class="form-control input-md" [(ngModel)]="customer.mobileNumber" name="mobileNumber">
 					</div>
 					<div class="col-md-4"></div>
 				</div>
@@ -108,7 +108,7 @@
 				<div class="col-md-12">
 					<label class="col-md-4 control-label">Email Address</label>
 					<div class="col-md-4">
-						<input type="text" placeholder="Email Address..." class="form-control input-md" [(ngModel)]="customer.EmailAddress" name="emailAddress">
+						<input type="text" placeholder="Email Address..." class="form-control input-md" [(ngModel)]="customer.emailAddress" name="emailAddress">
 					</div>
 					<div class="col-md-4"></div>
 				</div>
@@ -120,7 +120,7 @@
 				<label class="col-md-4 control-label">Customer Orders</label>
 				<div class="col-md-8">
 					<select *ngIf="customers" class="form-control" #customer (change)="getCustomer(customer.value)">
-                        <option *ngFor="let order of customer.Order" [value]="customer.Order.OrderId" placeholder="Select an order...">
+                        <option *ngFor="let order of customer.order" [value]="customer.order.orderId" placeholder="Select an order...">
                             {{order.OrderId}}
                         </option>
                     </select>
