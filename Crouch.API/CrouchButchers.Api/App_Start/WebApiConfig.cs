@@ -4,12 +4,13 @@
     using System.Web.Http;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
+    using System.Web.Http.Cors;
 
     public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
         {
-            config.EnableCors();
+            config.EnableCors(new EnableCorsAttribute("*", "*", "GET, POST, OPTIONS, PUT, DELETE"));
 
             // Web API configuration and services
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));

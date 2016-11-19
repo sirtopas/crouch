@@ -1,7 +1,7 @@
 <div class="row">
 	<h2>Customers</h2>
 
-	<p>Select a customer</p>
+	<p>Select a customer from the list below</p>
 	<div class="col-sm-12">
 		<div class="col-sm-10">
 			<select *ngIf="customers" class="form-control" #customer (change)="getCustomer(customer.value)">
@@ -14,7 +14,7 @@
             </select>
 		</div>
 		<div class="col-sm-2">
-			<button type="button" class="btn btn-default" (click)="newCustomer()">New Customer</button>
+			<button type="button" class="btn btn-primary" (click)="newCustomer()">New Customer</button>
 		</div>
 	</div>
 </div>

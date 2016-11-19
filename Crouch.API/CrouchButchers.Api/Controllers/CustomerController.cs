@@ -33,6 +33,7 @@
 
         // PUT: api/Customer/5
         [ResponseType(typeof(void))]
+        [HttpPut]
         public IHttpActionResult PutCustomer(int customerId, Customer customer)
         {
             if (!ModelState.IsValid)

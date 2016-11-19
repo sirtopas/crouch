@@ -24,7 +24,22 @@ export class CustomerService {
             .map(res => res.json());
     }
 
+    public postCustomer(customer: Customer) {
+        return this.http.post(
+            Environment.baseUrl +
+            'Customer', JSON.stringify(customer)).map(res => res.json());
+    }
+
     public putCustomer(customer: Customer) {
-        return this.http.put(Environment.baseUrl + 'Customer/' + customer.customerId, JSON.stringify(customer));
+        let InData = { customerId: 'customer.customerId', customer: JSON.stringify(customer) };
+        return this.http.put(
+            Environment.baseUrl +
+            'Customer', InData).map(res => res.json());
+    }
+
+    public deleteCustomer(customerId: number) {
+        return this.http
+            .delete(Environment.baseUrl + 'Customer/Delete/' + customerId)
+            .map(res => res.json());
     }
 }

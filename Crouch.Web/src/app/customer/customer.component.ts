@@ -18,11 +18,13 @@ export class CustomerComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.customerService.getCustomers().subscribe(res => this.customers = res);
+        this.customerService.getCustomers()
+            .subscribe(res => this.customers = res);
     }
 
     public getCustomer(customerId: number) {
-        this.customerService.getCustomer(customerId).subscribe(res => this.customer = res);
+        this.customerService.getCustomer(customerId)
+            .subscribe(res => this.customer = res);
     }
 
     public newCustomer() {
@@ -38,14 +40,13 @@ export class CustomerComponent implements OnInit {
     }
 
     public putCustomer() {
-        this.customerService.putCustomer(this.customer).subscribe(complete => console.log("done"));
+        this.customerService.putCustomer(this.customer)
+            .subscribe(complete => console.log('done'));
     }
 
     public postCustomer() {
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-
-        this.http.post('http://localhost:20476/Api/Customer/PostCustomer', JSON.stringify(this.customer), { headers: headers })
+        this.http.post('http://localhost:20476/Api/Customer/PostCustomer',
+            JSON.stringify(this.customer))
             .map(response => response.json())
             .subscribe((res) => {
                 this.customer = new Customer();
@@ -54,10 +55,7 @@ export class CustomerComponent implements OnInit {
             );
     }
 
-    submitted = false;
-
     onSubmit() {
-        this.submitted = true;
         this.updateCustomer();
     }
 }
