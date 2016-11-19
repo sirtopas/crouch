@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Http, Headers } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import { Http } from '@angular/http';
 import { Order } from '../model/order';
 import { Customer } from '../model/customer';
 import 'rxjs/Rx';
@@ -20,7 +19,6 @@ export class OrderComponent {
   constructor(private http: Http) {
     this.http = http;
     this.getOrders();
-    this.getCustomers();
   }
 
   public getOrders() {
@@ -31,7 +29,7 @@ export class OrderComponent {
         this.orders = res
       },
       (err) => console.log(err),
-      () => console.log("Done")
+      () => console.log('Done')
       );
   }
 
@@ -39,22 +37,9 @@ export class OrderComponent {
     this.http.get('http://localhost:20476/Api/Order/GetOrder?id=' + id)
       .map(response => response.json())
       .subscribe((res) => {
-        this.order = res
+        this.order = res;
       },
       (err) => console.log(err)
-      );
-  }
-
-  public getCustomers() {
-    this.url = 'http://localhost:20476/Api/Customer';
-    this.http.get(this.url)
-      .map(response => response.json())
-      .subscribe((res) => {
-        this.customers = res,
-          console.log(this.customers)
-      },
-      (err) => console.log(err),
-      () => console.log("Done")
       );
   }
 }

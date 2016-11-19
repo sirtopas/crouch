@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http } from '@angular/http';
 import { Customer } from '../model/customer';
 import { CustomerService } from '../services/customer.service';
 import 'rxjs/Rx';
@@ -41,7 +41,7 @@ export class CustomerComponent implements OnInit {
 
     public putCustomer() {
         this.customerService.putCustomer(this.customer)
-            .subscribe(complete => console.log('done'));
+            .subscribe(customer => this.customer);
     }
 
     public postCustomer() {

@@ -2,20 +2,24 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
 import { routing } from './app.routes';
 
+import { AppComponent } from './app.component';
 import { CustomerComponent } from './customer/customer.component';
 import { OrderComponent } from './order/order.component';
+import { ProductComponent } from './product/product.component';
 
 import { CustomerService } from './services/customer.service';
-import { AppComponent } from './app.component';
+import { ProductService } from './services/product.service';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomerComponent,
-    OrderComponent
+    OrderComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +28,8 @@ import { AppComponent } from './app.component';
     routing
   ],
   providers: [
-    CustomerService
+    CustomerService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })
