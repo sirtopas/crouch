@@ -10,7 +10,6 @@ namespace CrouchButchers.Model
     [Table("ProductCategory")]
     public partial class ProductCategory
     {
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ProductCategory()
         {
             Product = new HashSet<Product>();
