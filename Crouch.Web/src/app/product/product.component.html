@@ -1,3 +1,10 @@
+<p *ngIf="categories">Select a category</p>
+<select class="form-control" #category (change)="getProducts(category.value)">
+    <option *ngFor="let category of categories" [value]="category.productCategoryId">
+        {{category.categoryName}} 
+    </option>
+</select>
+
 <div *ngIf="products">
     <div *ngFor="let product of products">
         {{product.productTitle}}

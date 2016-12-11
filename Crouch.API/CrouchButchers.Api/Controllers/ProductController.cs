@@ -8,6 +8,7 @@
     using System.Web.Http.Cors;
     using System.Web.Http.Description;
     using Model;
+    using System.Collections.Generic;
 
     [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class ProductController : ApiController
@@ -18,6 +19,11 @@
         public IQueryable<Product> GetProduct()
         {
             return db.Product;
+        }
+
+        public IEnumerable<Product> GetProductsInCategory(int id)
+        {
+            return db.Product.Where(product => product.ProductCategoryId == id);
         }
 
         // GET: api/Product/5

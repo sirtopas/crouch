@@ -8,9 +8,6 @@ import { Environment } from '../Environment';
 @Injectable()
 export class ProductService {
 
-    public product: Product;
-    public categories: ProductCategory[];
-
     constructor(private http: Http) { }
 
     public getProducts(): Observable<Product[]> {
@@ -21,7 +18,13 @@ export class ProductService {
 
     public getProductCategories(): Observable<ProductCategory[]> {
         return this.http
-            .get(Environment.baseUrl + 'Category')
+            .get(Environment.baseUrl + 'ProductCategory')
+            .map(res => res.json());
+    }
+
+    public getProductsInCategory(categoryId: number): Observable<Product[]> {
+        return this.http
+            .get(Environment.baseUrl + 'Product/GetProductsInCategory/' + categoryId)
             .map(res => res.json());
     }
 }
