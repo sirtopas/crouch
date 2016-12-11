@@ -3,8 +3,8 @@
 
     <p>Select an order</p>
     <select *ngIf="orders" class="form-control" #order (change)="getOrder(order.value)">
-        <option *ngFor="let order of orders" [value]="order.OrderId">
-            {{order.OrderTitle}} 
+        <option *ngFor="let order of orders" [value]="order.orderId">
+            {{order.orderTitle}} 
         </option>
     </select>
 </div>
@@ -16,9 +16,9 @@
         <div class="col-sm-12">
             <div class="form-group">
                 <div class="col-md-12">
-                    <label class="col-md-4 control-label">Order ID</label>  
+                    <label class="col-md-4 control-label">Order ID</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control input-md" [(ngModel)]="order.OrderId" name="id">
+                        <input type="text" class="form-control input-md" [(ngModel)]="order.orderId" name="id">
                     </div>
                     <div class="col-md-4"></div>
                 </div>
@@ -27,9 +27,9 @@
         <div class="col-sm-12">
             <div class="form-group">
                 <div class="col-md-12">
-                    <label class="col-md-4 control-label">Order Status</label>  
+                    <label class="col-md-4 control-label">Order Status</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control input-md" [(ngModel)]="order.OrderStatus.OrderStatusName" name="status">
+                        <input type="text" class="form-control input-md" [(ngModel)]="order.orderStatus.orderStatusName" name="status">
                     </div>
                     <div class="col-md-4"></div>
                 </div>
@@ -38,12 +38,12 @@
         <div class="col-sm-12">
             <div class="form-group">
                 <div class="col-md-12">
-                    <label class="col-md-4 control-label">Customer Name</label>  
+                    <label class="col-md-4 control-label">Customer Name</label>
                     <select *ngIf="customers" class="form-control" #customer>
-                        <option *ngFor="let customer of customers" [value]="order.CustomerId" placeholder="Select a customer...">
-                            {{customer.FirstName}} {{customer.LastName}} 
+                        <option *ngFor="let customer of customers" [value]="order.customerId" placeholder="Select a customer...">
+                            {{customer.firstName}} {{customer.lastName}} 
                         </option>
-                    </select>  
+                    </select>
                     <div class="col-md-4"></div>
                 </div>
             </div>
@@ -51,9 +51,9 @@
         <div class="col-sm-12">
             <div class="form-group">
                 <div class="col-md-12">
-                    <label class="col-md-4 control-label">Order Date</label>  
+                    <label class="col-md-4 control-label">Order Date</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control input-md" [(ngModel)]="order.OrderDate" name="orderDate">
+                        <input type="text" class="form-control input-md" [(ngModel)]="order.orderDate" name="orderDate">
                     </div>
                     <div class="col-md-4"></div>
                 </div>
@@ -62,9 +62,9 @@
         <div class="col-sm-12">
             <div class="form-group">
                 <div class="col-md-12">
-                    <label class="col-md-4 control-label">Collection Date</label>  
+                    <label class="col-md-4 control-label">Collection Date</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control input-md" [(ngModel)]="order.CollectionDate" name="collectionDate">
+                        <input type="text" class="form-control input-md" [(ngModel)]="order.collectionDate" name="collectionDate">
                     </div>
                     <div class="col-md-4"></div>
                 </div>
@@ -73,9 +73,9 @@
         <div class="col-sm-12">
             <div class="form-group">
                 <div class="col-md-12">
-                    <label class="col-md-4 control-label">Order Deposit</label>  
+                    <label class="col-md-4 control-label">Order Deposit</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control input-md" [(ngModel)]="order.OrderDeposit" name="orderDeposit">
+                        <input type="text" class="form-control input-md" [(ngModel)]="order.orderDeposit" name="orderDeposit">
                     </div>
                     <div class="col-md-4"></div>
                 </div>
@@ -84,14 +84,14 @@
         <div class="col-sm-12">
             <div class="form-group">
                 <div class="col-md-12">
-                    <label class="col-md-4 control-label">Order Value</label>  
+                    <label class="col-md-4 control-label">Order Value</label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control input-md" [(ngModel)]="order.OrderValue" name="orderValue">
+                        <input type="text" class="form-control input-md" [(ngModel)]="order.orderValue" name="orderValue">
                     </div>
                     <div class="col-md-4"></div>
                 </div>
             </div>
-        </div>                                                
+        </div>
         <button type="submit" class="btn btn-default">Submit</button>
     </form>
 </div>
@@ -99,13 +99,13 @@
     <p>Create a new order</p>
     <form (ngSubmit)="createOrder()" #newOrderForm="ngForm">
         <div class="col-md-12">
-            <label class="col-md-4 control-label">Customer</label>  
+            <label class="col-md-4 control-label">Customer</label>
             <div class="col-md-8">
                 <select *ngIf="customers" class="form-control" #customer>
                     <option *ngFor="let customer of customers" [value]="customer.CustomerId" placeholder="Select a customer...">
                         {{customer.FirstName}} {{customer.LastName}} 
                     </option>
-                </select>                                                  
+                </select>
             </div>
         </div>
         <button type="submit" class="btn btn-default">Submit</button>

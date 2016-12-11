@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
 import { Customer } from '../model/customer';
 import { CustomerService } from '../services/customer.service';
 import 'rxjs/Rx';
@@ -13,9 +12,7 @@ export class CustomerComponent implements OnInit {
     public customers: Customer[];
     public customer: Customer;
 
-    constructor(private http: Http, private customerService: CustomerService) {
-        this.http = http;
-    }
+    constructor(private customerService: CustomerService) { }
 
     ngOnInit() {
         this.customerService.getCustomers()

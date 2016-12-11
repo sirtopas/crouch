@@ -10,6 +10,7 @@ import { OrderComponent } from './order/order.component';
 import { ProductComponent } from './product/product.component';
 
 import { CustomerService } from './services/customer.service';
+import { OrderService } from './services/order.service';
 import { ProductService } from './services/product.service';
 
 
@@ -29,6 +30,7 @@ import { ProductService } from './services/product.service';
   ],
   providers: [
     CustomerService,
+    OrderService,
     ProductService
   ],
   bootstrap: [AppComponent]

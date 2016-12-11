@@ -8,6 +8,7 @@
     using System.Web.Http.Cors;
     using System.Web.Http.Description;
     using Model;
+    using System.Collections.Generic;
 
     [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class OrderController : ApiController
@@ -31,6 +32,11 @@
             }
 
             return Ok(order);
+        }
+
+        public IEnumerable<Order> GetCustomerOrders(int id)
+        {
+            return db.Order.Where(order => order.CustomerId == id);
         }
 
         // PUT: api/Order/5

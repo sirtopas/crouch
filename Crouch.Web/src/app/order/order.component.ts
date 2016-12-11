@@ -1,45 +1,29 @@
-import { Component } from '@angular/core';
-import { Http } from '@angular/http';
+import { Component, OnInit } from '@angular/core';
 import { Order } from '../model/order';
 import { Customer } from '../model/customer';
+import { OrderService } from '../services/order.service';
 import 'rxjs/Rx';
 
 @Component({
-  selector: 'crouch-order',
-  templateUrl: 'order.component.html',
-  styleUrls: []
+    selector: 'app-crouch-order',
+    templateUrl: 'order.component.html',
+    styleUrls: []
 })
-export class OrderComponent {
+export class OrderComponent implements OnInit {
 
-  url: string;
-  public orders: Order[];
-  public order: Order;
-  public customers: Customer[];
+    public orders: Order[];
+    public order: Order;
+    public customers: Customer[];
 
-  constructor(private http: Http) {
-    this.http = http;
-    this.getOrders();
-  }
+    ngOnInit() {
+        this.orderService.getOrders()
+            .subscribe(res => this.orders = res);
+    }
 
-  public getOrders() {
-    this.url = 'http://localhost:20476/Api/Order';
-    this.http.get(this.url)
-      .map(response => response.json())
-      .subscribe((res) => {
-        this.orders = res
-      },
-      (err) => console.log(err),
-      () => console.log('Done')
-      );
-  }
+    constructor(private orderService: OrderService) { }
 
-  public getOrder(id: number) {
-    this.http.get('http://localhost:20476/Api/Order/GetOrder?id=' + id)
-      .map(response => response.json())
-      .subscribe((res) => {
-        this.order = res;
-      },
-      (err) => console.log(err)
-      );
-  }
+    public getOrder(id: number) {
+        this.orderService.getOrder(id)
+            .subscribe(res => this.order = res);
+    }
 }
