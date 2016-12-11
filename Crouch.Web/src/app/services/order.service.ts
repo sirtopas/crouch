@@ -22,7 +22,6 @@ export class OrderService {
     }
 
     public getOrder(orderId: number): Observable<Order> {
-        console.log("HIT");
         return this.http
             .get(Environment.baseUrl + 'Order/GetOrder/' + orderId)
             .map(res => res.json());

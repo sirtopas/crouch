@@ -102,8 +102,8 @@
             <label class="col-md-4 control-label">Customer</label>
             <div class="col-md-8">
                 <select *ngIf="customers" class="form-control" #customer>
-                    <option *ngFor="let customer of customers" [value]="customer.CustomerId" placeholder="Select a customer...">
-                        {{customer.FirstName}} {{customer.LastName}} 
+                    <option *ngFor="let customer of customers" [value]="customer.customerId" placeholder="Select a customer...">
+                        {{customer.firstName}} {{customer.lastName}} 
                     </option>
                 </select>
             </div>
