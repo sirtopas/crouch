@@ -16,5 +16,4 @@ export class ProductService {
             .get(Environment.baseUrl + 'Product')
             .map(res => res.json());
     }
-
 }

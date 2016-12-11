@@ -1,3 +1,5 @@
+import { Order } from './order';
+
 export class Customer {
     public customerId: number;
     public firstName: string;
@@ -10,4 +12,5 @@ export class Customer {
     public phoneNumber: string;
     public mobileNumber: string;
     public emailAddress: string;
+    public orders: Order[];
 }

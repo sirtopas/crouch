@@ -45,14 +45,8 @@ export class CustomerComponent implements OnInit {
     }
 
     public postCustomer() {
-        this.http.post('http://localhost:20476/Api/Customer/PostCustomer',
-            JSON.stringify(this.customer))
-            .map(response => response.json())
-            .subscribe((res) => {
-                this.customer = new Customer();
-            },
-            (err) => console.log(err)
-            );
+        this.customerService.postCustomer(this.customer)
+            .subscribe(customer => this.customer);
     }
 
     onSubmit() {
