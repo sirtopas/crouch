@@ -1,12 +1,17 @@
 <div class="row">
-    <h2>Orders</h2>
-
-    <p>Select an order</p>
-    <select *ngIf="orders" class="form-control" #order (change)="getOrder(order.value)">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2>Orders</h2>
+        </div>
+        <div class="panel-body">
+            <p>Select an order</p>
+            <select *ngIf="orders" class="form-control" #order (change)="getOrder(order.value)">
         <option *ngFor="let order of orders" [value]="order.orderId">
             {{order.orderTitle}} 
         </option>
     </select>
+        </div>
+    </div>
 </div>
 
 <hr />
