@@ -13,7 +13,7 @@ import { CustomerService } from './services/customer.service';
 import { OrderService } from './services/order.service';
 import { ProductService } from './services/product.service';
 
-
+import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
 
 @NgModule({
   declarations: [
@@ -23,6 +23,7 @@ import { ProductService } from './services/product.service';
     ProductComponent
   ],
   imports: [
+    Ng2Bs3ModalModule,
     BrowserModule,
     FormsModule,
     HttpModule,

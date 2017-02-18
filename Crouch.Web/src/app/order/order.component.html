@@ -6,10 +6,15 @@
         <div class="panel-body">
             <p>Select an order</p>
             <select *ngIf="orders" class="form-control" #order (change)="getOrder(order.value)">
-        <option *ngFor="let order of orders" [value]="order.orderId">
-            {{order.orderTitle}} 
-        </option>
-    </select>
+                <option *ngFor="let order of orders" [value]="order.orderId">
+                    {{order.orderTitle}} 
+                </option>
+            </select>
+        </div>
+        <div class="panel-footer">
+            <button type="button" class="btn btn-default" (click)="addOrder()">
+                <i class="fa fa-plus"></i> Add Order
+            </button>
         </div>
     </div>
 </div>
@@ -116,3 +121,16 @@
         <button type="submit" class="btn btn-default">Submit</button>
     </form>
 </div>
+
+<modal #newOrderModal>
+    <form #newOrderForm="ngForm">
+        <modal-header>
+            Add a new Order
+        </modal-header>
+        <modal-body>
+            <div class="form-group">
+
+            </div>
+        </modal-body>
+    </form>
+</modal>
