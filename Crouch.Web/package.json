@@ -25,6 +25,7 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.1.1",
     "ng2-bs3-modal": "^0.10.4",
+    "ng2-pagination": "^2.0.0",
     "rxjs": "5.0.3",
     "ts-helpers": "^1.1.2",
     "zone.js": "^0.7.6"

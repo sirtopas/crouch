@@ -11,13 +11,14 @@
                             <th>Customer Name</th>
                         </tr>
                     </thead>
-                    <tbody *ngFor="let order of orders">
+                    <tbody *ngFor="let order of orders | paginate: {itemsPerPage: 10, currentPage: page }">
                         <tr>
                             <td>{{order.customer.firstName}} {{order.customer.lastName}}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+            <pagination-controls (pageChange)="page = $event"></pagination-controls>
         </div>
         <div class="panel-footer">
             <button type="button" class="btn btn-default" (click)="addOrder()">
