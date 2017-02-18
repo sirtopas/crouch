@@ -4,12 +4,20 @@
             <h2>Orders</h2>
         </div>
         <div class="panel-body">
-            <p>Select an order</p>
-            <select *ngIf="orders" class="form-control" #order (change)="getOrder(order.value)">
-                <option *ngFor="let order of orders" [value]="order.orderId">
-                    {{order.orderTitle}} 
-                </option>
-            </select>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Customer Name</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let order of orders">
+                        <tr>
+                            <td>{{order.customer.firstName}} {{order.customer.lastName}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="panel-footer">
             <button type="button" class="btn btn-default" (click)="addOrder()">
@@ -105,22 +113,6 @@
         <button type="submit" class="btn btn-default">Submit</button>
     </form>
 </div>
-<div *ngIf="!order">
-    <p>Create a new order</p>
-    <form (ngSubmit)="createOrder()" #newOrderForm="ngForm">
-        <div class="col-md-12">
-            <label class="col-md-4 control-label">Customer</label>
-            <div class="col-md-8">
-                <select *ngIf="customers" class="form-control" #customer>
-                    <option *ngFor="let customer of customers" [value]="customer.customerId" placeholder="Select a customer...">
-                        {{customer.firstName}} {{customer.lastName}} 
-                    </option>
-                </select>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-</div>
 
 <modal #newOrderModal>
     <form #newOrderForm="ngForm">
@@ -129,7 +121,17 @@
         </modal-header>
         <modal-body>
             <div class="form-group">
-
+                <div class="col-md-12">
+                    <label class="col-md-4 control-label">Customer</label>
+                    <div class="col-md-8">
+                        <select *ngIf="customers" class="form-control" #customer>
+                    <option *ngFor="let customer of customers" [value]="customer.customerId" placeholder="Select a customer...">
+                        {{customer.firstName}} {{customer.lastName}} 
+                    </option>
+                </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
             </div>
         </modal-body>
     </form>
