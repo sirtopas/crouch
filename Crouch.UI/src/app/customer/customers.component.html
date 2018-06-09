@@ -1,0 +1,265 @@
+<div class="col-sm-12" *ngIf="customers">
+    <div class="table-responsive">
+        <div class="loader-overlay loader-inverse" [class.loader.overlay.visible]="isLoading">
+            <div class="loader-icon">
+                <div class="loader-animation"></div>
+            </div>
+        </div>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Town</th>
+                    <th>County</th>
+                    <th>Post Code</th>
+                    <th>Phone</th>
+                    <th>Mobile</th>
+                    <th>Email</th>
+                    <th>Edit</th>
+                    <th>Orders</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let customer of customers | paginate: { itemsPerPage: 10, currentPage: currentPage, totalItems: total }">
+                    <td>{{customer.title}}</td>
+                    <td>{{customer.firstName}}</td>
+                    <td>{{customer.lastName}}</td>
+                    <td>{{customer.town}}</td>
+                    <td>{{customer.county}}</td>
+                    <td>{{customer.postCode}}</td>
+                    <td>{{customer.phoneNumber}}</td>
+                    <td>{{customer.mobileNumber}}</td>
+                    <td>{{customer.emailAddress}}</td>
+                    <td>
+                        <a class="clickable" (click)="editCustomer(this.customer.customerId)">Edit</a>
+                    </td>
+                    <td>
+                        <a [routerLink]="['/orders', customer.customerId]">View Orders</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls (pageChange)="getPage($event)"></pagination-controls>
+    </div>
+</div>
+<div class="col-sm-2">
+    <button type="button" class="btn btn-primary" *ngIf="!newCustomerFlag" (click)="createNewCustomer()">New Customer</button>
+</div>
+
+<bs-modal #newCustomerModal>
+    <bs-modal-header [showDismiss]="true">
+        <h4 class="modal-title">Add a new customer</h4>
+    </bs-modal-header>
+    <bs-modal-body>
+        <div *ngIf="newCustomer">
+            <form #newCustomerForm="ngForm">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Title</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Title..." class="form-control input-md" [(ngModel)]="newCustomer.title" name="title">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">First Name</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="First Name..." class="form-control input-md" [(ngModel)]="newCustomer.firstName" name="firstName">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Last Name</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Last Name..." class="form-control input-md" [(ngModel)]="newCustomer.lastName" name="lastName">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Address 1</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Address 1..." class="form-control input-md" [(ngModel)]="newCustomer.address1" name="address1">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Address 2</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Address 2..." class="form-control input-md" [(ngModel)]="newCustomer.address2" name="address2">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Town</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Town..." class="form-control input-md" [(ngModel)]="newCustomer.town" name="town">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">County</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="County..." class="form-control input-md" [(ngModel)]="newCustomer.county" name="county">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Post Code</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="PostCode..." class="form-control input-md" [(ngModel)]="newCustomer.postCode" name="postcode">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Phone Number</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Phone Number..." class="form-control input-md" [(ngModel)]="newCustomer.phoneNumber" name="phoneNumber">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Mobile Number</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Mobile Number..." class="form-control input-md" [(ngModel)]="newCustomer.mobileNumber" name="mobileNumber">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Email Address</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Email Address..." class="form-control input-md" [(ngModel)]="newCustomer.emailAddress" name="emailAddress">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </bs-modal-body>
+    <bs-modal-footer>
+        <button type="button" class="btn btn-default" (click)="newCustomerModal.dismiss()">Close</button>
+        <button type="submit" class="btn btn-success" (click)="saveNewCustomer()">Submit</button>
+    </bs-modal-footer>
+</bs-modal>
+
+<bs-modal #editCustomerModal>
+    <bs-modal-header [showDismiss]="true">
+        <h4 class="modal-title">Edit customer</h4>
+    </bs-modal-header>
+    <bs-modal-body>
+        <div *ngIf="customerToEdit">
+            <form #editCustomerForm="ngForm">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Title</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Title..." class="form-control input-md" [(ngModel)]="customerToEdit.title" name="title">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">First Name</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="First Name..." class="form-control input-md" [(ngModel)]="customerToEdit.firstName" name="firstName">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Last Name</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Last Name..." class="form-control input-md" [(ngModel)]="customerToEdit.lastName" name="lastName">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Address 1</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Address 1..." class="form-control input-md" [(ngModel)]="customerToEdit.address1" name="address1">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Address 2</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Address 2..." class="form-control input-md" [(ngModel)]="customerToEdit.address2" name="address2">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Town</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Town..." class="form-control input-md" [(ngModel)]="customerToEdit.town" name="town">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">County</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="County..." class="form-control input-md" [(ngModel)]="customerToEdit.county" name="county">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Post Code</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="PostCode..." class="form-control input-md" [(ngModel)]="customerToEdit.postCode" name="postcode">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Phone Number</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Phone Number..." class="form-control input-md" [(ngModel)]="customerToEdit.phoneNumber" name="phoneNumber">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Mobile Number</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Mobile Number..." class="form-control input-md" [(ngModel)]="customerToEdit.mobileNumber"
+                                    name="mobileNumber">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Email Address</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Email Address..." class="form-control input-md" [(ngModel)]="customerToEdit.emailAddress"
+                                    name="emailAddress">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </bs-modal-body>
+    <bs-modal-footer>
+        <button type="button" class="btn btn-default" (click)="editCustomerModal.dismiss()">Close</button>
+        <button type="submit" class="btn btn-success" (click)="updateCustomer()">Submit</button>
+    </bs-modal-footer>
+</bs-modal>

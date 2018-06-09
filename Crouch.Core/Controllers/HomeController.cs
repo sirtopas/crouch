@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using Crouch.Core.Content;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 namespace Crouch.Core.Controllers
 {
@@ -18,6 +14,7 @@ namespace Crouch.Core.Controllers
 			_context = context;
 		}
 
+		[HttpGet]
 		public string Index()
 		{
 			return _context.Customer.First().FirstName;

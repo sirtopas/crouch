@@ -1,0 +1,259 @@
+<div class="col-sm-12" *ngIf="productCategories">
+    <div class="table-responsive">
+        <div class="loader-overlay loader-inverse" [class.loader.overlay.visible]="isLoading">
+            <div class="loader-icon">
+                <div class="loader-animation"></div>
+            </div>
+        </div>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Category ID</th>
+                    <th>Category Name</th>
+                    <th>Last Updated</th>
+                    <th>Created Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let productCategory of productCategories">
+                    <td>{{productCategory.productCategoryId}}</td>
+                    <td>{{productCategory.categoryName}}</td>
+                    <td>{{productCategory.lastEditedDate | date:'short'}}</td>
+                    <td>{{productCategory.createdDate | date:'short'}}</td>
+                    <td>
+                        <a class="clickable" (click)="editProductCategory(productCategory)">Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <button type="button" class="btn btn-primary pull-right" (click)="createNewProductCategory()">New Category</button>
+</div>
+
+<div class="col-sm-12" *ngIf="products">
+    <div class="table-responsive">
+        <div class="loader-overlay loader-inverse" [class.loader.overlay.visible]="isLoading">
+            <div class="loader-icon">
+                <div class="loader-animation"></div>
+            </div>
+        </div>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Product Title</th>
+                    <th>Product Description</th>
+                    <th>Category Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of products">
+                    <td>{{product.productId}}</td>
+                    <td>{{product.productTitle}}</td>
+                    <td>{{product.productDescription}}</td>
+                    <td>{{product.productCategory?.categoryName}}</td>
+                    <td>
+                        <a class="clickable" (click)="editProduct(product)">Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <button type="button" class="btn btn-primary pull-right" (click)="createNewProduct()">New Product</button>
+</div>
+
+<bs-modal #newProductCategoryModal>
+    <bs-modal-header [showDismiss]="true">
+        <h4 class="modal-title">Add a new category</h4>
+    </bs-modal-header>
+    <bs-modal-body>
+        <form #newProductCategoryForm="ngForm">
+            <div *ngIf="newProductCategory">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Name</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Name..." class="form-control input-md" [(ngModel)]="newProductCategory.categoryName" name="title"
+                                    required>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </bs-modal-body>
+    <bs-modal-footer>
+        <button type="button" class="btn btn-default" (click)="newProductCategoryModal.dismiss()">Close</button>
+        <button type="submit" class="btn btn-success" [disabled]="!newProductCategoryForm.valid" (click)="saveNewProductCategory()">Submit</button>
+    </bs-modal-footer>
+</bs-modal>
+
+<bs-modal #editProductCategoryModal>
+    <bs-modal-header [showDismiss]="true">
+        <h4 class="modal-title">Edit product category</h4>
+    </bs-modal-header>
+    <bs-modal-body>
+        <form #editProductCategoryForm="ngForm">
+            <div *ngIf="productCategoryToEdit">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Name</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Name..." class="form-control input-md" [(ngModel)]="productCategoryToEdit.categoryName" name="title"
+                                    required>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </bs-modal-body>
+    <bs-modal-footer>
+        <button type="button" class="btn btn-default" (click)="editProductCategoryModal.dismiss()">Close</button>
+        <button type="submit" class="btn btn-success" [disabled]="!editProductCategoryForm.valid" (click)="updateProductCategory()">Submit</button>
+    </bs-modal-footer>
+</bs-modal>
+
+<bs-modal #newProductModal>
+    <bs-modal-header [showDismiss]="true">
+        <h4 class="modal-title">Add a new product</h4>
+    </bs-modal-header>
+    <bs-modal-body>
+        <div *ngIf="newProduct">
+            <form #newProductForm="ngForm">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Title</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Title..." class="form-control input-md" [(ngModel)]="newProduct.productTitle" name="productTitle"
+                                    required>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Description</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Description..." class="form-control input-md" [(ngModel)]="newProduct.productDescription"
+                                    name="productDescription" required>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Price Per Kg</label>
+                            <div class="col-md-4">
+                                <input type="number" placeholder="Price / Kg" class="form-control input-md" [(ngModel)]="newProduct.pricePerKg" name="pricePerKg"
+                                    required>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Is Active</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Is Active..." class="form-control input-md" [(ngModel)]="newProduct.isActive" name="isActive"
+                                    required>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Sum By Weight?</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Sum By Weight?" class="form-control input-md" [(ngModel)]="newProduct.sumByWeight" name="sumByWeight"
+                                    required>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Category</label>
+                            <select class="form-control" name="category" [(ngModel)]="newProduct.productCategory.productCategoryId">
+                                <option>All</option>
+                                <option *ngFor="let productCategory of productCategories" [ngValue]="productCategory.productCategoryId">
+                                    {{productCategory.categoryName}}
+                                </option>
+                            </select>
+                            <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </bs-modal-body>
+    <bs-modal-footer>
+        <button type="button" class="btn btn-default" (click)="newProductModal.dismiss()">Close</button>
+        <button type="submit" class="btn btn-success" (click)="saveNewProduct()">Submit</button>
+    </bs-modal-footer>
+</bs-modal>
+
+<bs-modal #editProductModal>
+    <bs-modal-header [showDismiss]="true">
+        <h4 class="modal-title">Edit a product</h4>
+    </bs-modal-header>
+    <bs-modal-body>
+        <form #editProductForm="ngForm">
+            <div *ngIf="productToEdit">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Title</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Title..." class="form-control input-md" [(ngModel)]="productToEdit.productTitle" name="productTitle"
+                                    required>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Description</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Description..." class="form-control input-md" [(ngModel)]="productToEdit.productDescription"
+                                    name="productDescription" required>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Price Per Kg</label>
+                            <div class="col-md-4">
+                                <input type="number" placeholder="Price / Kg" class="form-control input-md" [(ngModel)]="productToEdit.pricePerKg" name="pricePerKg"
+                                    required>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Is Active</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Is Active..." class="form-control input-md" [(ngModel)]="productToEdit.isActive" name="isActive"
+                                    required>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Sum By Weight?</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Sum By Weight?" class="form-control input-md" [(ngModel)]="productToEdit.sumByWeight" name="sumByWeight"
+                                    required>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="col-md-4 control-label">Category</label>
+                            <select class="form-control" name="category" [(ngModel)]="productToEdit.productCategory.productCategoryId">
+                                <option>All</option>
+                                <option *ngFor="let productCategory of productCategories" [ngValue]="productCategory.productCategoryId">
+                                    {{productCategory.categoryName}}
+                                </option>
+                            </select>
+                            <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </bs-modal-body>
+    <bs-modal-footer>
+        <button type="button" class="btn btn-default" (click)="editProductModal.dismiss()">Close</button>
+        <button type="submit" class="btn btn-success" *ngIf="editProductForm.valid" (click)="updateProduct()">Submit</button>
+    </bs-modal-footer>
+</bs-modal>

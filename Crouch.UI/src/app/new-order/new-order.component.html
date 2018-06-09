@@ -1,0 +1,139 @@
+<div class="col-sm-12" *ngIf="customers && !isLoading">
+	<input auto-complete [source]="customers" class="form-control" value-property-name="firstName" display-property-name="firstName"
+	 [max-num-list]="10" [min-chars]="3" [list-formatter]="autocompleListFormatter" (valueChanged)="customerSelected($event)"
+	 [disabled]="newOrder.customer != null" placeholder="Start typing a name to see results..." />
+</div>
+
+<div *ngIf="isLoading" class="col-sm-12">
+	<div class="loader-inline">
+		<div class="loader-icon">
+			<div class="loader-animation"></div>
+		</div>
+	</div>
+</div>
+
+<hr />
+
+<div class="col-sm-9" *ngIf="newOrder.customer && newOrder.orderItems">
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3>Customer Details</h3>
+		</div>
+		<div class="panel-body">
+			<div class="col-md-6">
+				<div class="col-md-12">
+					<label class="col-md-4 control-label">Title</label>
+					<div class="col-md-4">
+						{{newOrder.customer.title}}
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+
+				<div class="col-md-12">
+					<label class="col-md-4 control-label">First Name</label>
+					<div class="col-md-4">
+						{{newOrder.customer.firstName}}
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+
+				<div class="col-md-12">
+					<label class="col-md-4 control-label">Last Name</label>
+					<div class="col-md-4">
+						{{newOrder.customer.lastName}}
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="col-md-12">
+					<label class="col-md-4 control-label">Phone Number</label>
+					<div class="col-md-4">
+						{{newOrder.customer.phoneNumber}}
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="col-md-12">
+					<label class="col-md-4 control-label">Mobile Number</label>
+					<div class="col-md-4">
+						{{newOrder.customer.mobileNumber}}
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="col-md-12">
+					<label class="col-md-4 control-label">Email Address</label>
+					<div class="col-md-4">
+						{{newOrder.customer.emailAddress}}
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="col-md-12">
+					<label class="col-md-4 control-label">Address 1</label>
+					<div class="col-md-4">
+						{{newOrder.customer.address1}}
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="col-md-12">
+					<label class="col-md-4 control-label">Address 2</label>
+					<div class="col-md-4">
+						{{newOrder.customer.address2}}
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="col-md-12">
+					<label class="col-md-4 control-label">Post Code</label>
+					<div class="col-md-4">
+						{{newOrder.customer.postCode}}
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="col-md-12">
+					<label class="col-md-4 control-label">Town</label>
+					<div class="col-md-4">
+						{{newOrder.customer.town}}
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				<div class="col-md-12">
+					<label class="col-md-4 control-label">County</label>
+					<div class="col-md-4">
+						{{newOrder.customer.county}}
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr />
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3>Order Items</h3>
+		</div>
+		<div class="panel-body">
+			<div *ngFor="let product of products" class="col-sm-12">
+				<div class="col-sm-3"> {{product.productTitle}}</div>
+				<div class="col-sm-3"> {{product.productDescription}}</div>
+				<div class="col-sm-3" *ngIf="product.sumByWeight"> £{{product.pricePerKg}}/kg</div>
+				<div class="col-sm-3" *ngIf="!product.sumByWeight"> £{{product.pricePerKg}}/item</div>
+				<a (click)="addProductToOrder(product, 1)" class="col-sm-3 clickable">Add To Order</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="col-sm-3" *ngIf="newOrder.customer && newOrder.orderItems">
+	<h3>Order Summary</h3>
+	<div *ngFor="let orderItem of newOrder.orderItems" class="col-sm-12">
+		<div class="col-sm-3"> {{orderItem.product.productTitle}}</div>
+		<div class="col-sm-3"> {{orderItem.product.productDescription}}</div>
+		<div class="col-sm-3" *ngIf="orderItem.product.sumByWeight"> £{{orderItem.product.pricePerKg}}/kg</div>
+		<div class="col-sm-3" *ngIf="!orderItem.product.sumByWeight"> £{{orderItem.product.pricePerKg}}/item</div>
+		<div class="col-sm-3"> {{orderItem.quantity}}</div>
+	</div>
+	<div class="col-sm-12">
+		<b>Total: {{newOrder.orderValue | currency:'GBP'}}</b>
+	</div>
+</div>
