@@ -20,6 +20,7 @@ namespace Crouch.Core
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+			services.AddCors();
             services.AddMvc();
 			services.AddDbContext<CrouchContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CrouchDatabase")));
 			services.AddSwaggerGen(c =>
@@ -36,10 +37,10 @@ namespace Crouch.Core
                 app.UseDeveloperExceptionPage();
             }
 
+			app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+			
 			app.UseSwagger();
-
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
-            // specifying the Swagger JSON endpoint.
+            
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Crouch API V1");
