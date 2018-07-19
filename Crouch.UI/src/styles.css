@@ -1,0 +1,297 @@
+body { 
+    margin-top: 150px !important;
+    font-family: 'Arbutus Slab'
+}
+
+.navbar {
+    margin-bottom: 30px;
+    background-color: white;
+    border: none;
+}
+
+@media(max-width:767px){
+    .navbar-logo {
+        margin: 0 auto;
+        max-width: 70px;
+    }
+}
+
+@media(min-width:768px){
+    .navbar-header {
+        float: left;
+        text-align: center;
+        width: 100%;
+    }
+
+    .navbar-brand {
+        float:none;
+        font-weight: bold;
+        color: #67614d !important;
+    }
+
+    .navbar .navbar-nav {
+        display: inline-block;
+        float: none;
+        vertical-align: top;
+        font-family: "Crimson Text";
+    }
+
+    .navbar-logo {
+        margin: 0 auto;
+        max-width: 100px;
+    }
+}
+
+
+.navbar-inverse .navbar-nav > li > a:hover, a:visited, a:link {
+    color: black !important;
+}
+
+.navbar .navbar-collapse {
+    text-align: center;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.vertical-center {
+    min-height: 100%;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+}
+
+h2 {
+    font-family: 'Anton';
+}
+
+h3 {
+    font-size: 14px;
+}
+
+.btn {
+	border-radius: 0px;
+}
+
+.icon-bar {
+    background-color: #67614d !important;
+}
+
+.spin {
+    animation: spin .9s infinite linear;
+}
+
+@keyframes spin {
+    from {
+        -moz-transform: scale(1) rotate(0deg);
+        -ms-transform: scale(1) rotate(0deg);
+        -o-transform: scale(1) rotate(0deg);
+        -webkit-transform: scale(1) rotate(0deg);
+        transform: scale(1) rotate(0deg);
+    }
+    to {
+        -moz-transform: scale(1) rotate(360deg);
+        -ms-transform: scale(1) rotate(360deg);
+        -o-transform: scale(1) rotate(360deg);
+        -webkit-transform: scale(1) rotate(360deg);
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, .7);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+    filter: alpha(opacity=70);
+    display: none;
+}
+
+.loader-container-visible {
+    display: block;
+}
+
+.loader-inline {
+    width: 30px;
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: 18px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 20px;
+}
+
+.loader-icon {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    top: 50%;
+    margin-top: -15px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 15px;
+    opacity: 0.7;
+}
+
+.loader-animation {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.loader-animation:before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    border-radius: 500rem;
+    border: 0.2em solid #666666;
+    opacity: 0.9;
+}
+
+.loader-animation:after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    -webkit-animation: spin 0.6s linear;
+    animation: spin 0.6s linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    border-radius: 500rem;
+    border-color: #ffffff transparent transparent;
+    border-style: solid;
+    border-width: 0.2em;
+    box-shadow: 0px 0px 0px 1px transparent;
+    opacity: 0.75;
+}
+
+.loader-inline .loader-animation:after {
+    border-color: #000000 transparent transparent !important;
+}
+
+.loader-overlay {
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.65);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=65)";
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    -moz-transition: all 0.3s ease-in-out 0s;
+    -ms-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-inverse {
+    background-color: rgba(255, 255, 255, 0.55);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=55)";
+}
+
+.loader-inverse .loader-animation {
+    opacity: 0.75;
+}
+
+.loader-inverse .loader-animation:after {
+    border-color: #000000 transparent transparent !important;
+}
+
+.loader-overlay-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loader-overlay+.table {
+    margin-bottom: 0 !important;
+}
+
+/* vietnamese */
+@font-face {
+    font-family: 'Anton';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Anton Regular'), local('Anton-Regular'), url(https://fonts.gstatic.com/s/anton/v9/9Yb_jZb3zvMIiuTm_VeFqA.woff2) format('woff2');
+    unicode-range: U+0102-0103, U+1EA0-1EF9, U+20AB;
+}
+
+/* latin-ext */
+@font-face {
+    font-family: 'Anton';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Anton Regular'), local('Anton-Regular'), url(https://fonts.gstatic.com/s/anton/v9/KgPSGrLwjoSLN4ZBWvXSfQ.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+    font-family: 'Anton';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Anton Regular'), local('Anton-Regular'), url(https://fonts.gstatic.com/s/anton/v9/o-91-t7-bPc7W26HmS2N4Q.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+/* latin-ext */
+@font-face {
+    font-family: 'Arbutus Slab';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Arbutus Slab Regular'), local('ArbutusSlab-Regular'), url(https://fonts.gstatic.com/s/arbutusslab/v6/6k3Yp6iS9l4jRIpynA8qMz0LW-43aMEzIO6XUTLjad8.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+    font-family: 'Arbutus Slab';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Arbutus Slab Regular'), local('ArbutusSlab-Regular'), url(https://fonts.gstatic.com/s/arbutusslab/v6/6k3Yp6iS9l4jRIpynA8qM-gdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+/* latin */
+@font-face {
+    font-family: 'Crimson Text';
+    font-style: italic;
+    font-weight: 400;
+    src: local('Crimson Text Italic'), local('CrimsonText-Italic'), url(https://fonts.gstatic.com/s/crimsontext/v8/a5QZnvmn5amyNI-t2BMkWBMBlNeli-0RcAdOFWWLdxQ.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+/* latin */
+@font-face {
+    font-family: 'Crimson Text';
+    font-style: italic;
+    font-weight: 700;
+    src: local('Crimson Text Bold Italic'), local('CrimsonText-BoldItalic'), url(https://fonts.gstatic.com/s/crimsontext/v8/4j4TR-EfnvCt43InYpUNDEcqRxak6Wc5LUVz-l064SE.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+/* latin */
+@font-face {
+    font-family: 'Crimson Text';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Crimson Text Regular'), local('CrimsonText-Regular'), url(https://fonts.gstatic.com/s/crimsontext/v8/3IFMwfRa07i-auYR-B-zNegdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+/* latin */
+@font-face {
+    font-family: 'Crimson Text';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Crimson Text Bold'), local('CrimsonText-Bold'), url(https://fonts.gstatic.com/s/crimsontext/v8/rEy5tGc5HdXy56Xvd4f3I3NuWYKPzoeKl5tYj8yhly0.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
