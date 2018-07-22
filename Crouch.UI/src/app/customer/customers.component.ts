@@ -2,22 +2,22 @@ import { Component, OnInit, ViewContainerRef, ViewChild, Input } from '@angular/
 import { Customer } from '../model/customer';
 import { CustomerService } from '../services/customer.service';
 import { PagedRequest } from '../model/paged-request';
-
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { BsModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
+import { ToastrService } from 'ngx-toastr';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
     moduleId: module.id,
-    selector: 'crouch-customers',
+    selector: 'app-crouch-customers',
     templateUrl: 'customers.component.html'
 })
 
 export class CustomersComponent implements OnInit {
 
     @Input() newCustomerFlag: boolean;
-    @ViewChild('newCustomerModal') newCustomerModal: BsModalComponent;
-    @ViewChild('editCustomerModal') editCustomerModal: BsModalComponent;
+    @ViewChild('newCustomerModal') newCustomerModal: ModalDirective;
+    @ViewChild('editCustomerModal') editCustomerModal: ModalDirective;
     isLoading = false;
+    hide = false;
     customers: Customer[];
     customer: Customer;
     newCustomer: Customer;
@@ -26,8 +26,7 @@ export class CustomersComponent implements OnInit {
     currentPage = 0;
     total = 20;
 
-    constructor(public toastr: ToastsManager, private customerService: CustomerService, viewContainerRef: ViewContainerRef) {
-        this.toastr.setRootViewContainerRef(viewContainerRef);
+    constructor(public toastr: ToastrService, private customerService: CustomerService, viewContainerRef: ViewContainerRef) {
     }
 
     ngOnInit() {
@@ -53,12 +52,12 @@ export class CustomersComponent implements OnInit {
 
     public editCustomer(customerId: number) {
         this.customerToEdit = this.customers.filter(c => c.customerId === customerId)[0];
-        this.editCustomerModal.open();
+        this.editCustomerModal.show();
     }
 
     public createNewCustomer() {
         this.newCustomer = new Customer();
-        this.newCustomerModal.open();
+        this.newCustomerModal.show();
     }
 
     public saveNewCustomer() {
@@ -66,7 +65,7 @@ export class CustomersComponent implements OnInit {
         this.customerService.postCustomer(this.newCustomer).subscribe(response => {
             this.newCustomer = new Customer();
             this.toastr.success('New Customer has been created', 'Customer Created');
-            this.newCustomerModal.close();
+            this.newCustomerModal.hide();
             this.pagedRequest.pageNumber = 0;
             this.pagedRequest.pageSize = 10;
             if (!this.newCustomerFlag) {
@@ -84,7 +83,7 @@ export class CustomersComponent implements OnInit {
             this.customerToEdit = new Customer();
             this.getAllCustomers();
             this.toastr.success('Customer has been updated', 'Customer Updated');
-            this.editCustomerModal.close();
+            this.editCustomerModal.hide();
         });
     }
 }

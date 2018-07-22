@@ -1,7 +1,7 @@
 <div class="col-sm-12" *ngIf="customers && !isLoading">
-	<input auto-complete [source]="customers" class="form-control" value-property-name="firstName" display-property-name="firstName"
+	<!-- <input auto-complete [source]="customers" class="form-control" value-property-name="firstName" display-property-name="firstName"
 	 [max-num-list]="10" [min-chars]="3" [list-formatter]="autocompleListFormatter" (valueChanged)="customerSelected($event)"
-	 [disabled]="newOrder.customer != null" placeholder="Start typing a name to see results..." />
+	 [disabled]="newOrder.customer != null" placeholder="Start typing a name to see results..." /> -->
 </div>
 
 <div *ngIf="isLoading" class="col-sm-12">

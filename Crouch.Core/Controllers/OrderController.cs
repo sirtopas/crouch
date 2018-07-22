@@ -5,6 +5,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Crouch.Core.Content;
     using Microsoft.EntityFrameworkCore;
+    using System.Collections.Generic;
 
     [Route("api/[controller]/[action]")]
     public class OrderController : Controller
@@ -16,48 +17,47 @@
             _context = context;
         }
 
-        // GET: api/Customer
-        [HttpPost]
-        public IQueryable<Customer> GetCustomers(PagedRequest pagedRequest)
+        // GET: api/Order
+        [HttpGet]
+        public IQueryable<Order> GetAllOrders()
         {
-            var customers = _context.Customer.OrderBy(c => c.CustomerId);
-            var test =  customers.Skip(pagedRequest.PageNumber * pagedRequest.PageSize).Take(pagedRequest.PageSize);
-            return test;
+            return _context.Order;
         }
 
+        // GET: api/Order/5
         [HttpGet]
-        public IQueryable<Customer> GetAllCustomers()
+        public IActionResult GetOrder(int id)
         {
-            return _context.Customer;
-        }
-
-        // GET: api/Customer/5
-        [HttpGet]
-        public Customer GetCustomer(int id)
-        {
-            Customer customer = _context.Customer.Find(id);
-            if (customer == null)
+            Order order = _context.Order.Find(id);
+            if (order == null)
             {
+                return NotFound();
             }
 
-            return customer;
+            return Ok(order);
         }
 
-        // PUT: api/Customer/5
+        [HttpGet]
+        public IEnumerable<Order> GetCustomerOrders(int id)
+        {
+            return _context.Order.Where(order => order.CustomerId == id);
+        }
+
+        // PUT: api/Order/5
         [HttpPut]
-        public IActionResult PutCustomer(int id, Customer customer)
+        public IActionResult PutOrder(int id, Order order)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != customer.CustomerId)
+            if (id != order.OrderId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(customer).State = EntityState.Modified;
+            _context.Entry(order).State = EntityState.Modified;
 
             try
             {
@@ -65,45 +65,48 @@
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CustomerExists(id))
+                if (!OrderExists(id))
                 {
                     return NotFound();
                 }
-                throw;
+                else
+                {
+                    throw;
+                }
             }
 
             return NoContent();
         }
 
-        // POST: api/Customer
+        // POST: api/Order
         [HttpPost]
-        public IActionResult PostCustomer(Customer customer)
+        public IActionResult PostOrder(Order order)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Customer.Add(customer);
+            _context.Order.Add(order);
             _context.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = customer.CustomerId }, customer);
+            return CreatedAtRoute("DefaultApi", new { id = order.OrderId }, order);
         }
 
-        // DELETE: api/Customer/5
+        // DELETE: api/Order/5
         [HttpDelete]
-        public IActionResult DeleteCustomer(int id)
+        public IActionResult DeleteOrder(int id)
         {
-            Customer customer = _context.Customer.Find(id);
-            if (customer == null)
+            Order order = _context.Order.Find(id);
+            if (order == null)
             {
                 return NotFound();
             }
 
-            _context.Customer.Remove(customer);
+            _context.Order.Remove(order);
             _context.SaveChanges();
 
-            return Ok(customer);
+            return Ok(order);
         }
 
         protected override void Dispose(bool disposing)
@@ -115,9 +118,9 @@
             base.Dispose(disposing);
         }
 
-        bool CustomerExists(int id)
+        bool OrderExists(int id)
         {
-            return _context.Customer.Count(e => e.CustomerId == id) > 0;
+            return _context.Order.Count(e => e.OrderId == id) > 0;
         }
     }
 }

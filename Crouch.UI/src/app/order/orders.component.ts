@@ -3,7 +3,7 @@ import { Order } from '../model/order';
 import { OrderService } from '../services/order.service';
 
 @Component({
-    selector: 'orders',
+    selector: 'app-crouch-orders',
     templateUrl: 'orders.component.html'
 })
 

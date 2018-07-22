@@ -18,7 +18,7 @@
 
 		// GET: api/Customer
 		[HttpPost]
-		public IQueryable<Customer> GetCustomers(PagedRequest pagedRequest)
+        public IQueryable<Customer> GetCustomers([FromBody] PagedRequest pagedRequest)
 		{
 			var customers = _context.Customer.OrderBy(c => c.CustomerId);
 			return customers.Skip(pagedRequest.PageNumber * pagedRequest.PageSize).Take(pagedRequest.PageSize);

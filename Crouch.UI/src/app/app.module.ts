@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { routing } from './app.routes';
@@ -18,10 +18,9 @@ import { CustomerService } from '../app/services/customer.service';
 import { OrderService } from '../app/services/order.service';
 import { ProductService } from '../app/services/product.service';
 
-import { ToastModule } from 'ng2-toastr/ng2-toastr';
-import { BsModalModule } from 'ng2-bs3-modal';
+import { ToastrModule } from 'ngx-toastr';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 
 @NgModule({
     declarations: [
@@ -37,13 +36,12 @@ import { NguiAutoCompleteModule } from '@ngui/auto-complete';
     imports: [
         BrowserAnimationsModule,
         BrowserModule,
-        BsModalModule,
+        ModalModule.forRoot(),
         FormsModule,
         HttpModule,
         NgxPaginationModule,
-        NguiAutoCompleteModule,
         routing,
-        ToastModule.forRoot()
+        ToastrModule.forRoot()
     ],
     providers: [
         CustomerService,

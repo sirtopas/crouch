@@ -7,10 +7,10 @@ import { ProductCategory } from '../model/product-category';
 import { CustomerService } from '../services/customer.service';
 import { ProductService } from '../services/product.service';
 import { OrderItem } from '../model/order-item';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
-    selector: 'crouch-new-order',
+    selector: 'app-crouch-new-order',
     templateUrl: 'new-order.component.html'
 })
 
@@ -25,10 +25,9 @@ export class NewOrderComponent implements OnInit {
     constructor(
         private customerService: CustomerService,
         private productService: ProductService,
-        public toastr: ToastsManager,
+        public toastr: ToastrService,
         private viewContainerRef: ViewContainerRef,
         private domSanitizer: DomSanitizer) {
-        this.toastr.setRootViewContainerRef(viewContainerRef);
     }
 
     ngOnInit() {

@@ -2,21 +2,20 @@ import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Product } from '../model/product';
 import { ProductCategory } from '../model/product-category';
 import { ProductService } from '../services/product.service';
-
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { BsModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
+import { ToastrService } from 'ngx-toastr';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
-    selector: 'crouch-product',
+    selector: 'app-crouch-product',
     templateUrl: 'product.component.html'
 })
 
 export class ProductComponent implements OnInit {
 
-    @ViewChild('newProductCategoryModal') newProductCategoryModal: BsModalComponent;
-    @ViewChild('newProductModal') newProductModal: BsModalComponent;
-    @ViewChild('editProductCategoryModal') editProductCategoryModal: BsModalComponent;
-    @ViewChild('editProductModal') editProductModal: BsModalComponent;
+    @ViewChild('newProductCategoryModal') newProductCategoryModal: ModalDirective;
+    @ViewChild('newProductModal') newProductModal: ModalDirective;
+    @ViewChild('editProductCategoryModal') editProductCategoryModal: ModalDirective;
+    @ViewChild('editProductModal') editProductModal: ModalDirective;
     isLoading = false;
     products: Product[];
     productCategories: ProductCategory[];
@@ -27,9 +26,8 @@ export class ProductComponent implements OnInit {
 
     constructor(
         private productService: ProductService,
-        public toastr: ToastsManager,
+        public toastr: ToastrService,
         private viewContainerRef: ViewContainerRef) {
-        this.toastr.setRootViewContainerRef(viewContainerRef);
     }
 
     ngOnInit() {
@@ -43,25 +41,25 @@ export class ProductComponent implements OnInit {
 
     private createNewProductCategory() {
         this.newProductCategory = new ProductCategory();
-        this.newProductCategoryModal.open();
+        this.newProductCategoryModal.show();
     }
 
     private createNewProduct() {
         this.newProduct = new Product();
         this.newProduct.productCategory = new ProductCategory();
-        this.newProductModal.open();
+        this.newProductModal.show();
     }
 
     private editProductCategory(productCategory: ProductCategory) {
         this.productCategoryToEdit = productCategory;
-        this.editProductCategoryModal.open();
+        this.editProductCategoryModal.show();
     }
 
     public updateProductCategory() {
         this.productService.putProductCategory(this.productCategoryToEdit).subscribe(res => {
             this.toastr.success(this.productCategoryToEdit.categoryName + ' has been updated', 'Category updated');
             this.productCategoryToEdit = new ProductCategory();
-            this.editProductCategoryModal.close();
+            this.editProductCategoryModal.hide();
         });
     }
 
@@ -70,7 +68,7 @@ export class ProductComponent implements OnInit {
         this.productService.postProductCategory(this.newProductCategory).subscribe(res => {
             this.productService.getProductCategories().subscribe(categories => {
                 this.productCategories = categories;
-                this.newProductModal.close();
+                this.newProductModal.hide();
                 this.isLoading = false;
                 this.toastr.success(this.newProductCategory.categoryName + ' has been created', 'New Category created');
                 this.newProductCategory = new ProductCategory();
@@ -80,7 +78,7 @@ export class ProductComponent implements OnInit {
 
     private editProduct(product: Product) {
         this.productToEdit = product;
-        this.editProductModal.open();
+        this.editProductModal.show();
     }
 
     public updateProduct() {
@@ -88,7 +86,7 @@ export class ProductComponent implements OnInit {
             this.toastr.success(this.productToEdit.productTitle + ' has been updated', 'Product updated');
             this.productToEdit = new Product();
             this.productToEdit.productCategory = new ProductCategory();
-            this.editProductModal.close();
+            this.editProductModal.hide();
         });
     }
 
@@ -99,7 +97,7 @@ export class ProductComponent implements OnInit {
         this.productService.postProduct(this.newProduct).subscribe(res => {
             this.productService.getProducts().subscribe(products => {
                 this.products = products;
-                this.newProductCategoryModal.close();
+                this.newProductCategoryModal.hide();
                 this.isLoading = false;
                 this.toastr.success(this.newProduct.productTitle + ' has been created', 'New Product created');
                 this.newProduct = new Product();

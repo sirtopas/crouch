@@ -47,9 +47,9 @@
 <div class="col-sm-2">
     <button type="button" class="btn btn-primary" *ngIf="!newCustomerFlag" (click)="createNewCustomer()">New Customer</button>
 </div>
-
+<!-- 
 <bs-modal #newCustomerModal>
-    <bs-modal-header [showDismiss]="true">
+    <bs-modal-header>
         <h4 class="modal-title">Add a new customer</h4>
     </bs-modal-header>
     <bs-modal-body>
@@ -156,7 +156,7 @@
 </bs-modal>
 
 <bs-modal #editCustomerModal>
-    <bs-modal-header [showDismiss]="true">
+    <bs-modal-header>
         <h4 class="modal-title">Edit customer</h4>
     </bs-modal-header>
     <bs-modal-body>
@@ -262,4 +262,4 @@
         <button type="button" class="btn btn-default" (click)="editCustomerModal.dismiss()">Close</button>
         <button type="submit" class="btn btn-success" (click)="updateCustomer()">Submit</button>
     </bs-modal-footer>
-</bs-modal>
+</bs-modal> -->

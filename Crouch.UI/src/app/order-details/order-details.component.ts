@@ -3,20 +3,17 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { OrderService } from '../services/order.service';
 import { Order } from '../model/order';
 import { OrderItem } from '../model/order-item';
-
-import { BsModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
-
-import 'rxjs/add/operator/switchMap';
-
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
-    selector: 'order-details',
+    selector: 'app-order-details',
     templateUrl: 'order-details.component.html'
 })
 
 export class OrderDetailsComponent implements OnInit {
 
-    @ViewChild('newOrderItemModal') newOrderItemModal: BsModalComponent;
+    @ViewChild('newOrderItemModal') newOrderItemModal: ModalDirective;
     newOrderItem: any;
     order: Order;
 
@@ -26,13 +23,13 @@ export class OrderDetailsComponent implements OnInit {
         private orderService: OrderService) { }
 
     ngOnInit() {
-        this.route.params
-            .switchMap((params: ParamMap) => this.orderService.getOrder(+params['id']))
+        this.route.params.pipe(
+            switchMap((params: ParamMap) => this.orderService.getOrder(+params['id'])))
             .subscribe((order) => this.order = order);
     }
 
     addOrderItem() {
         this.newOrderItem = new OrderItem();
-        this.newOrderItemModal.open();
+        this.newOrderItemModal.show();
     }
 }

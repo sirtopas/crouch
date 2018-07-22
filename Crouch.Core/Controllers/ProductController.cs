@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
+    [Route("api/[controller]/[action]")]
     public class ProductController : Controller
     {
         readonly CrouchContext _context;
@@ -17,11 +18,12 @@
         }
 
         [HttpGet]
-        public IQueryable<Product> GetProduct()
+        public IQueryable<Product> GetAllProducts()
         {
             return _context.Product.Include(p => p.ProductCategory);
         }
 
+        [HttpGet]
         public IEnumerable<Product> GetProductsInCategory(int id)
         {
             return _context.Product.Where(product => product.ProductCategoryId == id);

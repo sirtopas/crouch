@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
-    selector: 'crouch-home',
+    selector: 'app-crouch-home',
     templateUrl: 'home.component.html'
 })
 

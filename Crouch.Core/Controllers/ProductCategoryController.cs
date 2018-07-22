@@ -18,7 +18,7 @@
         }
 
         [HttpGet]
-        public IQueryable<ProductCategory> GetProductCategory()
+        public IQueryable<ProductCategory> GetAllProductCategories()
         {
             return _context.ProductCategory;
         }
