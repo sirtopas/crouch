@@ -15,7 +15,7 @@ export class OrderService extends BaseService {
 
     public getOrders(): Observable<Order[]> {
         return this.http
-            .get(environment.baseUrl + 'Order', this.requestOptions)
+            .get(environment.baseUrl + 'Order/GetAllOrders', this.requestOptions)
             .pipe(map(res => res.json()));
     }
 
