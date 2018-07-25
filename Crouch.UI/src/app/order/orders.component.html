@@ -5,25 +5,30 @@
 	</div>
 
 	<div *ngIf="orders">
-		<div *ngFor="let order of orders">
-			<div class="col-sm-4">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<div class="form-group">
-							<div class="col-sm-12">
-								<div class="col-sm-6">
-									<label>ID</label>
+		<div class="row">
+			<div *ngFor="let order of orders">
+				<div class="col-sm-4">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							{{order.orderDate | date:'short'}}
+						</div>
+						<div class="panel-body">
+							<div class="form-group">
+								<div class="col-sm-12">
+									<div class="col-sm-6">
+										<label>ID</label>
+									</div>
+									<div class="col-sm-6">
+										{{order.orderId}}
+									</div>
 								</div>
-								<div class="col-sm-6">
-									{{order.orderId}}
-								</div>
-							</div>
-							<div class="col-sm-12">
-								<div class="col-sm-6">
-									<label>Title</label>
-								</div>
-								<div class="col-sm-6">
-									{{order.orderTitle}}
+								<div class="col-sm-12">
+									<div class="col-sm-6">
+										<label>Title</label>
+									</div>
+									<div class="col-sm-6">
+										{{order.orderTitle}}
+									</div>
 								</div>
 							</div>
 						</div>
@@ -32,5 +37,4 @@
 			</div>
 		</div>
 	</div>
-
 </div>
