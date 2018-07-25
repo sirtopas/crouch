@@ -22,7 +22,7 @@ export class ProductService extends BaseService {
 
     public getProductCategories(): Observable<ProductCategory[]> {
         return this.http
-            .get(environment.baseUrl + 'ProductCategory')
+            .get(environment.baseUrl + 'ProductCategory/GetAllProductCategories')
             .pipe(map(res => res.json()));
     }
 
