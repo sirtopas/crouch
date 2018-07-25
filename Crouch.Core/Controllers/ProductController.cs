@@ -20,7 +20,7 @@
         [HttpGet]
         public IQueryable<Product> GetAllProducts()
         {
-            return _context.Product.Include(p => p.ProductCategory);
+            return _context.Product;
         }
 
         [HttpGet]

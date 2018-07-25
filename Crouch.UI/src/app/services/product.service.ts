@@ -16,7 +16,7 @@ export class ProductService extends BaseService {
 
     public getProducts(): Observable<Product[]> {
         return this.http
-            .get(environment.baseUrl + 'Product')
+            .get(environment.baseUrl + 'Product/GetAllProducts')
             .pipe(map(res => res.json()));
     }
 
