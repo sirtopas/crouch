@@ -36,8 +36,7 @@ export class CustomerService extends BaseService {
 
     public postCustomer(customer: Customer) {
         return this.http
-            .post(environment.baseUrl + 'Customer/PostCustomer', JSON.stringify(customer), this.requestOptions)
-            .pipe(map(res => res.json()));
+            .post(environment.baseUrl + 'Customer/PostCustomer/', JSON.stringify(customer), this.requestOptions);
     }
 
     public putCustomer(customer: Customer) {
