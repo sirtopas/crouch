@@ -76,7 +76,7 @@
 
 		// POST: api/Customer
 		[HttpPost]
-		public IActionResult PostCustomer(Customer customer)
+        public IActionResult PostCustomer(Customer customer)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -86,7 +86,7 @@
 			_context.Customer.Add(customer);
 			_context.SaveChanges();
 
-			return CreatedAtRoute("DefaultApi", new { id = customer.CustomerId }, customer);
+            return Ok();
 		}
 
 		// DELETE: api/Customer/5
