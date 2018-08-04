@@ -76,7 +76,7 @@
 
 		// POST: api/Customer
 		[HttpPost]
-        public IActionResult PostCustomer(Customer customer)
+        public IActionResult PostCustomer([FromBody]Customer customer)
 		{
 			if (!ModelState.IsValid)
 			{
