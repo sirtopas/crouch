@@ -1,3 +1,9 @@
+<div *ngIf="!customers" class="loader-inline">
+    <div class="loader-icon">
+        <div class="loader-animation"></div>
+    </div>
+</div>
+
 <div class="col-sm-12" *ngIf="customers">
     <div class="table-responsive">
         <div class="loader-overlay loader-inverse" [class.loader.overlay.visible]="isLoading">
@@ -43,10 +49,11 @@
         </table>
         <pagination-controls (pageChange)="getPage($event)"></pagination-controls>
     </div>
+    <div class="col-sm-2 pull-right">
+        <button type="button" class="btn btn-primary" *ngIf="!newCustomerFlag" (click)="createNewCustomer()">New Customer</button>
+    </div>
 </div>
-<div class="col-sm-2">
-    <button type="button" class="btn btn-primary" *ngIf="!newCustomerFlag" (click)="createNewCustomer()">New Customer</button>
-</div>
+
 <div bsModal #newCustomerModal="bs-modal" class="modal fade" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
