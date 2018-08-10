@@ -75,7 +75,13 @@ export class CustomersComponent implements OnInit {
     }
 
     public getPage(event: any) {
-        console.log(event);
+        this.isLoading = true;
+        this.pagedRequest.pageNumber = +event;
+        this.currentPage = +event;
+        this.customerService.getCustomers(this.pagedRequest).subscribe(res => {
+            this.customers = res;
+            this.isLoading = false;
+        });
     }
 
     public updateCustomer() {
