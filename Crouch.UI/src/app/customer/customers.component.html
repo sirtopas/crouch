@@ -42,7 +42,7 @@
                         <a class="clickable" (click)="editCustomer(this.customer.customerId)">Edit</a>
                     </td>
                     <td>
-                        <a [routerLink]="['/orders', customer.customerId]">View Orders</a>
+                        <a class="clickable" [routerLink]="['/orders', customer.customerId]">View Orders ({{customer.order.length}})</a>
                     </td>
                 </tr>
             </tbody>

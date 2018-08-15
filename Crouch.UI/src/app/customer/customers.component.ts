@@ -31,7 +31,7 @@ export class CustomersComponent implements OnInit {
 
     ngOnInit() {
         this.isLoading = true;
-        this.pagedRequest.pageNumber = 0;
+        this.pagedRequest.pageNumber = 1;
         this.pagedRequest.pageSize = 10;
         if (!this.newCustomerFlag) {
             this.getAllCustomers();
